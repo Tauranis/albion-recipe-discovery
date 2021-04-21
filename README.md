@@ -1,7 +1,14 @@
 # Albion Profit Scanner
 
-![Cover](./images/giphy.gif)
+This project aims to answer the following question:
+**Is there any item I could craft from scratch(buying items from makert) and profit at current market's prices?**
 
+Secundary questions:
+* What is the recipe?
+* What is the profit?
+* Which city?
+
+![](https://github.com/Tauranis/albion-recipe-discovery/raw/master/images/albion_recipe_discovery.gif)
 
 ## Installation
 
