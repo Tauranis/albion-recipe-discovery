@@ -1,7 +1,7 @@
 # Albion Profit Scanner
 
 This project aims to answer the following question:
-**Is there any item I could craft from scratch(buying items from makert) and profit at current market's prices?**
+**Is there any item I could craft from scratch(buying items from market) and profit at current market's prices?**
 
 Secundary questions:
 * What is the recipe?
