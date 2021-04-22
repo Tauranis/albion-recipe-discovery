@@ -10,6 +10,13 @@ Secundary questions:
 
 ![](https://github.com/Tauranis/albion-recipe-discovery/raw/master/images/albion_recipe_discovery.gif)
 
+## Albion Online Data Project
+
+This project is built uppon [Albion Data Project](https://www.albion-online-data.com/).
+
+In order to have the most updated prices, download their client and follow their instructions to work properly.
+
+
 ## Installation
 
 ```bash
