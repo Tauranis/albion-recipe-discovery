@@ -27,6 +27,7 @@ pip install -r requirements.txt
 
 ## Run
 
+### CLI
 
 Single city
 ```bash
@@ -42,4 +43,10 @@ python -m recipe_discover.app \
 --quality 1 \
 --city Bridgewatch,Fort%20Sterling,Lymhurst,Martlock,Thetford \
 --output_path ./report.csv
+```
+
+### Streamlit
+
+```bash
+streamlit run .\recipe_discovery\streamlit_app.py
 ```
