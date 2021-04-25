@@ -1,10 +1,11 @@
-from recipe_discovery.config import ALBION_ONLINE_DATA_API_URI
+from recipe_discovery.config import ALBION_ONLINE_DATA_API_URI, CITY_LIST, QUALITY_DICT
 from recipe_discovery.recipes import RECIPIES
 import requests
 import pandas as pd
 import datetime
 from tqdm import tqdm
 from collections import namedtuple
+import itertools
 
 import logging
 
@@ -16,12 +17,13 @@ Node = namedtuple("Node", "item_id, price, quantity, city")
 
 
 class ProfitDiscover:
-    def __init__(self, city, quality):
-        self.__city = city
-        self.__quality = quality
-        self.__recipes = None
+    def __init__(self):
+        self.__recipes = {
+            k: None for k in itertools.product(CITY_LIST, list(QUALITY_DICT.keys()))
+        }
+        logger.info("ProfitDiscover object created")
 
-    def request_prices(self):
+    def request_prices(self, city, quality):
         """Request prices from Albion Online Data project API
 
         Returns:
@@ -35,8 +37,8 @@ class ProfitDiscover:
         r = requests.get(
             ALBION_ONLINE_DATA_API_URI.format(
                 item=",".join(recipies_item_name),
-                cities=self.city,
-                quality=self.quality,
+                cities=city.replace(" ", "%20"),
+                quality=QUALITY_DICT[quality],
             )
         )
 
@@ -134,7 +136,19 @@ class ProfitDiscover:
             highest_price["sell_price_min"][0],
         )
 
-    def scan(self):
+    def scan(self, city=None, quality=None, use_buffer=True):
+
+        if city is None or quality is None:
+            return None
+
+        logger.info(
+            f"Scanning recipies for {city} at quality {quality}. Use buffer: {use_buffer}"
+        )
+
+        if use_buffer == True and self.recipies[(city, quality)] is not None:
+            logger.info(f"Prices for {city} on buffer!")
+            return self.recipies[(city, quality)]
+
         recipies_buffer = {
             "item_name": [],
             "profitability": [],
@@ -145,7 +159,7 @@ class ProfitDiscover:
             "recipe": [],
         }
 
-        item_set_df = self.request_prices()
+        item_set_df = self.request_prices(city, quality)
 
         for item_name in tqdm(RECIPIES):
 
@@ -171,16 +185,14 @@ class ProfitDiscover:
             recipies_stats = pd.DataFrame(recipies_buffer)
             recipies_stats.sort_values("profitability", ascending=False, inplace=True)
 
+        self.recipies[(city, quality)] = recipies_stats
+
         return recipies_stats
-
-    @property
-    def city(self):
-        return self.__city
-
-    @property
-    def quality(self):
-        return self.__quality
 
     @property
     def recipies(self):
         return self.__recipes
+
+    @recipies.setter
+    def recipies(self, val):
+        self.__recipies = val
