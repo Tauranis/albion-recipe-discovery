@@ -8,3 +8,5 @@ QUALITY_DICT = {
     "Excellent": "4",
     "Masterpiece": "5",
 }
+
+N_COLS_RECIPE_ITEMS = 3

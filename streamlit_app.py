@@ -1,6 +1,11 @@
 import streamlit as st
 from recipe_discovery.discovery import ProfitDiscover
-from recipe_discovery.config import CITY_LIST, QUALITY_DICT
+from recipe_discovery.config import CITY_LIST, QUALITY_DICT, N_COLS_RECIPE_ITEMS
+from recipe_discovery.html_cell import recipe_html_cell, generate_recipe_html
+
+import math
+
+st.set_page_config(layout="wide")
 
 # Keep state from objects
 # Ref: https://discuss.streamlit.io/t/save-user-input-into-a-dataframe-and-access-later/2527/2
@@ -27,7 +32,25 @@ def scan_recipes(ps, city, quality, clear_cache):
 
 def show_recipes(recipes):
     if recipes is not None:
-        st.dataframe(recipes)
+
+        for _, row in recipes.iterrows():
+            print(row)
+
+            recipe_items_html = generate_recipe_html(row["recipe"], N_COLS_RECIPE_ITEMS)
+
+            nrows = int(math.ceil(len(row["recipe"]) / N_COLS_RECIPE_ITEMS))
+            # st.markdown(f"## {row['item_name']}")
+            st.components.v1.html(
+                recipe_html_cell.format(
+                    item_id=row["item_name"],
+                    recipe_price=row["recipe_price"],
+                    market_sell_price=row["sell_price"],
+                    profit=row["profit"],
+                    profitability=row["profitability"],
+                    recipe_items_html=recipe_items_html,
+                ),
+                height=145 * nrows,
+            )
 
 
 # Profit discover
@@ -47,7 +70,6 @@ btn_clear_cache = btn_clear_cache_gen.checkbox(
 # Display
 st.title("Albion Online Profit Scanner")
 st.markdown(f"City: **{city}** Quality: **{quality}**")
-
 
 recipies_df = get_recipies_obj()
 
