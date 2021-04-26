@@ -4,3 +4,4 @@ click
 requests
 tqdm
 black
+streamlit
