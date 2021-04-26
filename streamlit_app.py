@@ -56,20 +56,20 @@ def show_recipes(recipes):
 # Profit discover
 profitDiscover = get_scanner()
 
-# Sidebar widgets
-city = st.sidebar.selectbox("City", CITY_LIST, help="City to scan prices")
-quality = st.sidebar.selectbox(
+
+st.title("Albion Online Profit Scanner")
+
+selbox_city_gen, selbox_quality_gen = st.beta_columns(2)
+
+city = selbox_city_gen.selectbox("City", CITY_LIST, help="City to scan prices")
+quality = selbox_quality_gen.selectbox(
     "Item quality", list(QUALITY_DICT.keys()), help="Item quality"
 )
-btn_run_gen, btn_clear_cache_gen = st.sidebar.beta_columns(2)
+btn_run_gen, btn_clear_cache_gen = st.beta_columns(2)
 btn_run = btn_run_gen.button("Scan", help="Scan recipies")
 btn_clear_cache = btn_clear_cache_gen.checkbox(
     "Clear cache", help="Clear cache and request updated prices from server"
 )
-
-# Display
-st.title("Albion Online Profit Scanner")
-st.markdown(f"City: **{city}** Quality: **{quality}**")
 
 recipies_df = get_recipies_obj()
 

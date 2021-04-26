@@ -47,8 +47,6 @@ recipe_html_cell = """
          }}
          
          .product_recipe {{
-         border: 3px outset pink;
-         background-color: lightblue;
          float: left;
          height:auto;
          width: auto;
@@ -60,12 +58,13 @@ recipe_html_cell = """
          
          .tr{{ 
          display:flex;
-         border: 3px outset green;
          }}
          
          .td{{ 
          display: table-cell; 
-         border: 3px outset green;
+         border-style: dashed;
+         border-width: 0px 3px 3px 0px;
+         border-color: red;
          width: 250px;
          }}
       </style>
