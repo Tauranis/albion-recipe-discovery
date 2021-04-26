@@ -22,6 +22,7 @@ class ProfitDiscover:
             k: None for k in itertools.product(CITY_LIST, list(QUALITY_DICT.keys()))
         }
         logger.info("ProfitDiscover object created")
+        logger.info(self.recipies)
 
     def request_prices(self, city, quality):
         """Request prices from Albion Online Data project API

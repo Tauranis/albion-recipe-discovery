@@ -39,7 +39,6 @@ def show_recipes(recipes):
             recipe_items_html = generate_recipe_html(row["recipe"], N_COLS_RECIPE_ITEMS)
 
             nrows = int(math.ceil(len(row["recipe"]) / N_COLS_RECIPE_ITEMS))
-            # st.markdown(f"## {row['item_name']}")
             st.components.v1.html(
                 recipe_html_cell.format(
                     item_id=row["item_name"],
@@ -55,7 +54,6 @@ def show_recipes(recipes):
 
 # Profit discover
 profitDiscover = get_scanner()
-
 
 st.title("Albion Online Profit Scanner")
 

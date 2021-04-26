@@ -8,7 +8,8 @@ Secundary questions:
 * What is the profit?
 * Which city?
 
-![](https://github.com/Tauranis/albion-recipe-discovery/raw/master/images/albion_recipe_discovery.gif)
+<!--![](https://github.com/Tauranis/albion-recipe-discovery/raw/master/images/albion_recipe_discovery.gif)-->
+![](https://github.com/Tauranis/albion-recipe-discovery/raw/master/images/albion_online_profit_scanner.png)
 
 ## Albion Online Data Project
 
@@ -31,16 +32,16 @@ pip install -r requirements.txt
 
 Single city
 ```bash
-python -m recipe_discover.app \
---quality 1 \
+python -m recipe_discovery.app \
+--quality Normal \
 --city Thetford \
 --output_path ./report.csv
 ```
 
 Multiple cities
 ```bash
-python -m recipe_discover.app \
---quality 1 \
+python -m recipe_discovery.app \
+--quality Normal \
 --city Bridgewatch,Fort%20Sterling,Lymhurst,Martlock,Thetford \
 --output_path ./report.csv
 ```
@@ -48,5 +49,5 @@ python -m recipe_discover.app \
 ### Streamlit
 
 ```bash
-streamlit run .\recipe_discovery\streamlit_app.py
+streamlit run ./streamlit_app.py
 ```
